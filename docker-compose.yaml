@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  postgres-db:
+    image: postgres:14-alpine
+    restart: always
+    container_name: city-postgres-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=citydb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+volumes:
+  db:
