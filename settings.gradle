@@ -1,4 +1,4 @@
-rootProject.name = 'web-service'
+rootProject.name = 'city-list-service'
 
 include 'service',
         'ui-angular'

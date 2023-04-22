@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="the.1st.developer" id="populate-table_city">
+
+        <preConditions onErrorMessage="Failed Pre Conditions for table" onFail="HALT">
+            <and>
+                <tableExists tableName="city"/>
+                <sqlCheck expectedResult="1">SELECT COUNT(*) city</sqlCheck>
+            </and>
+        </preConditions>
+
+        <loadData file="v1/resource/cities.csv" relativeToChangelogFile="true"
+                  tableName="city">
+            <column name="id" header="id" type="bigint"/>
+            <column name="name" header="name" type="varchar"/>
+            <column name="photo" header="photo" type="varchar(65000)"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

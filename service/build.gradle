@@ -54,7 +54,6 @@ compileJava {
     options.compilerArgs = [
             '-Amapstruct.suppressGeneratorTimestamp=true',
             '-Amapstruct.defaultComponentModel=spring',
-            '-Amapstruct.unmappedTargetPolicy=IGNORE',
-            '-Amapstruct.verbose=true'
+            '-Amapstruct.unmappedTargetPolicy=IGNORE'
     ]
 }

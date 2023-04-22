@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: city-list-service
+  datasource:
+    db-name: citydb
+    host: localhost
+    port: 5433
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.db-name}
+    username: postgres
+    password: postgres
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    drop-first: false
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
