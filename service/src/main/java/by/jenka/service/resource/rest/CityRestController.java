@@ -33,7 +33,7 @@ public class CityRestController {
                     "Additionally supports search type")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public Iterable<CityResponse> findAllBySpec(
+    public Iterable<CityResponse> findAllBySearchCriteria(
             @ParameterObject @Nullable CitySearchCriteria citySearchCriteria,
             @ParameterObject Pageable pageableRequest) {
         log.info("Find cities by criteria {} and page {}", citySearchCriteria, pageableRequest);

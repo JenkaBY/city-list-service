@@ -17,5 +17,5 @@ public interface CityMapper {
     @Mapping(target = "name", source = "source.name")
     @Mapping(target = "photo", source = "source.photo")
     @Mapping(target = "id", ignore = true)
-    CityEntity update(@MappingTarget CityEntity target, City source);
+    CityEntity updateTargetFields(@MappingTarget CityEntity target, City source);
 }
