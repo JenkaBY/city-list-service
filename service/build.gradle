@@ -23,6 +23,7 @@ repositories {
 ext {
     mapstructVersion = '1.5.3.Final'
     openApiDocVersion = '2.1.0'
+    specArgResolverVersion = '3.0.1'
 }
 
 dependencies {
@@ -32,9 +33,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiDocVersion}"
-
     implementation 'org.liquibase:liquibase-core'
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    implementation "net.kaczmarzyk:specification-arg-resolver:${specArgResolverVersion}"
+
     compileOnly 'org.projectlombok:lombok'
 
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
