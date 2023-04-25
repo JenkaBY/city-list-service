@@ -1,9 +1,9 @@
-package by.jenka.service.resource.rest;
+package by.jenka.service.controller.rest;
 
-import by.jenka.service.resource.mapper.CityRequestResponseMapper;
-import by.jenka.service.resource.model.request.CityRequest;
-import by.jenka.service.resource.model.request.CitySearchCriteria;
-import by.jenka.service.resource.model.response.CityResponse;
+import by.jenka.service.controller.mapper.CityRequestResponseMapper;
+import by.jenka.service.controller.model.request.CityRequest;
+import by.jenka.service.controller.model.request.CitySearchCriteria;
+import by.jenka.service.controller.model.response.CityResponse;
 import by.jenka.service.service.CityService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.annotation.Nullable;

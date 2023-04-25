@@ -1,4 +1,4 @@
-package by.jenka.service.resource.model.request;
+package by.jenka.service.controller.model.request;
 
 public enum SearchType {
     LIKE_IGNORE_CASE,

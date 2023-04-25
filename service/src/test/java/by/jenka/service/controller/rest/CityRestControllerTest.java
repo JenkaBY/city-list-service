@@ -1,4 +1,4 @@
-package by.jenka.service.resource.rest;
+package by.jenka.service.controller.rest;
 
 import static org.hamcrest.core.StringContains.containsString;
 import static org.mockito.Mockito.any;
@@ -9,10 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import by.jenka.service.resource.mapper.CityRequestResponseMapper;
-import by.jenka.service.resource.model.request.CityRequest;
-import by.jenka.service.resource.model.request.CitySearchCriteria;
-import by.jenka.service.resource.model.response.CityResponse;
+import by.jenka.service.controller.mapper.CityRequestResponseMapper;
+import by.jenka.service.controller.model.request.CityRequest;
+import by.jenka.service.controller.model.request.CitySearchCriteria;
+import by.jenka.service.controller.model.response.CityResponse;
 import by.jenka.service.service.CityService;
 import by.jenka.service.service.model.City;
 import com.fasterxml.jackson.databind.ObjectMapper;

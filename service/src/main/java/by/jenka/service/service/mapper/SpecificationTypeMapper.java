@@ -3,7 +3,7 @@ package by.jenka.service.service.mapper;
 import by.jenka.service.persistance.entity.CityEntity;
 import by.jenka.service.persistance.specification.CityLikeIgnoreCaseCriteria;
 import by.jenka.service.persistance.specification.CityStartsIgnoreCaseCriteria;
-import by.jenka.service.resource.model.request.SearchType;
+import by.jenka.service.controller.model.request.SearchType;
 import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import org.springframework.data.jpa.domain.Specification;

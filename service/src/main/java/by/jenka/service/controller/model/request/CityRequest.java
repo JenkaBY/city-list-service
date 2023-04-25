@@ -1,4 +1,4 @@
-package by.jenka.service.resource.model.request;
+package by.jenka.service.controller.model.request;
 
 import jakarta.validation.constraints.NotBlank;
 

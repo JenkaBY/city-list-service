@@ -1,7 +1,7 @@
-package by.jenka.service.resource.advice;
+package by.jenka.service.controller.advice;
 
-import by.jenka.service.resource.model.response.ApiErrorResponse;
-import by.jenka.service.resource.model.response.ViolationResponse;
+import by.jenka.service.controller.model.response.ApiErrorResponse;
+import by.jenka.service.controller.model.response.ViolationResponse;
 import by.jenka.service.service.exception.ApiCityServiceException;
 import by.jenka.service.service.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

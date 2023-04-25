@@ -2,7 +2,7 @@ package by.jenka.service.service.impl;
 
 import by.jenka.service.persistance.entity.CityEntity;
 import by.jenka.service.persistance.repository.CityRepository;
-import by.jenka.service.resource.model.request.CitySearchCriteria;
+import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.service.exception.ResourceNotFoundException;
 import by.jenka.service.service.mapper.CityMapper;
 import by.jenka.service.service.mapper.CitySpecificationMapper;

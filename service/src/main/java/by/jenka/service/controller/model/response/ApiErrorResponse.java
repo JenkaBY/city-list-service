@@ -1,4 +1,4 @@
-package by.jenka.service.resource.model.response;
+package by.jenka.service.controller.model.response;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;

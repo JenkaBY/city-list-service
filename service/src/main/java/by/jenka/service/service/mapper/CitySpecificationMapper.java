@@ -2,7 +2,7 @@ package by.jenka.service.service.mapper;
 
 import by.jenka.service.persistance.entity.CityEntity;
 import by.jenka.service.persistance.specification.SpecConst;
-import by.jenka.service.resource.model.request.CitySearchCriteria;
+import by.jenka.service.controller.model.request.CitySearchCriteria;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import net.kaczmarzyk.spring.data.jpa.utils.SpecificationBuilder;
