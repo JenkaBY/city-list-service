@@ -57,6 +57,12 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+tasks {
+    bootJar {
+        archiveFileName.set("city-api-service.jar")
+    }
+}
+
 compileJava {
     options.compilerArgs = [
             '-Amapstruct.suppressGeneratorTimestamp=true',

@@ -1,6 +1,36 @@
 version: '3.9'
 
 services:
+  api-service:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./service
+    image: city-api:0.1.0
+    container_name: city-api-service
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-db:5432/citydb"
+      SPRING_DATASOURCE_USER: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "postgres"
+      SERVER_PORT: "8080"
+    networks:
+      - backend_net
+      - public_net
+    depends_on:
+      - postgres-db
+  ui:
+    build:
+      dockerfile: ./Dockerfile
+      context: ./ui-angular
+    image: city-ui:0.1.0
+    container_name: city-ui-service
+    ports:
+      - "81:80"
+    networks:
+      - public_net
+    depends_on:
+      - api-service
   postgres-db:
     image: postgres:14-alpine
     restart: always
@@ -8,11 +38,16 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_DB=citydb
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      "POSTGRES_DB": "citydb"
+      "POSTGRES_USER": "postgres"
+      "POSTGRES_PASSWORD": "postgres"
     volumes:
       - "db:/var/lib/postgresql/data"
-
+    networks:
+      - backend_net
 volumes:
   db:
+
+networks:
+  backend_net:
+  public_net:
