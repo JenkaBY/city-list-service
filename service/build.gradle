@@ -7,7 +7,7 @@ plugins {
 group = 'by.jenka'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_17
-//targetCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {
@@ -21,7 +21,7 @@ repositories {
 }
 
 ext {
-    mapstructVersion = '1.5.3.Final'
+    mapstructVersion = '1.5.5.Final'
     openApiDocVersion = '2.1.0'
     specArgResolverVersion = '3.0.1'
 }
@@ -34,19 +34,20 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiDocVersion}"
     implementation 'org.liquibase:liquibase-core'
-    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     implementation "net.kaczmarzyk:specification-arg-resolver:${specArgResolverVersion}"
 
-    compileOnly 'org.projectlombok:lombok'
 
 //    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     runtimeOnly 'org.postgresql:postgresql'
 
-    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly 'org.projectlombok:lombok'
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.assertj:assertj-core'
     testRuntimeOnly 'com.h2database:h2'

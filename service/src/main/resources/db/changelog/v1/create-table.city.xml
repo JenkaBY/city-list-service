@@ -18,7 +18,9 @@
             <column name="name" type="VARCHAR">
                 <constraints nullable="false"/>
             </column>
-            <column name="photo" type="VARCHAR(65000)"/>
+            <column name="photo" type="VARCHAR(65000)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 

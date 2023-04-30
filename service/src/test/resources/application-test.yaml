@@ -2,6 +2,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
   datasource:
-    url: jdbc:h2:file:/data/demo
+    url: jdbc:h2:mem:testcitydb
   liquibase:
     enabled: true

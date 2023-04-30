@@ -9,5 +9,7 @@ public interface CityService {
 
     Page<City> findAllBySearchCriteria(CitySearchCriteria citySearchCriteria, Pageable pageable);
 
+    City findById(Long id);
+
     City update(Long id, City toBeSaved);
 }

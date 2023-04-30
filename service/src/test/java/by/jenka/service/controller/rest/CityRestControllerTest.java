@@ -1,14 +1,5 @@
 package by.jenka.service.controller.rest;
 
-import static org.hamcrest.core.StringContains.containsString;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import by.jenka.service.controller.mapper.CityRequestResponseMapper;
 import by.jenka.service.controller.model.request.CityRequest;
 import by.jenka.service.controller.model.request.CitySearchCriteria;
@@ -16,7 +7,6 @@ import by.jenka.service.controller.model.response.CityResponse;
 import by.jenka.service.service.CityService;
 import by.jenka.service.service.model.City;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Optional;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,6 +25,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.Optional;
+
+import static org.hamcrest.core.StringContains.containsString;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebMvcTest(controllers = CityRestController.class)
 class CityRestControllerTest {
     private static final String CITY_API_URL = "/api/v1/cities";
@@ -52,7 +50,7 @@ class CityRestControllerTest {
     class FindBySearchCriteria {
 
         @Test
-        void should_Return_Ok_WhenPageRequestParamsArePresent() throws Exception {
+        void should_Return_Ok_When_PageRequestParamsArePresent() throws Exception {
             var page = spy(Page.<City>empty());
             int pageNumber = 1;
             int pageSize = 5;
@@ -76,7 +74,7 @@ class CityRestControllerTest {
         }
 
         @Test
-        void should_Return_Ok_WhenPageRequestParamsAreAbsent() throws Exception {
+        void should_Return_Ok_When_PageRequestParamsAreAbsent() throws Exception {
             var page = spy(Page.<City>empty());
 
             when(cityService.findAllBySearchCriteria(new CitySearchCriteria(null, null),
@@ -98,28 +96,35 @@ class CityRestControllerTest {
 
     @Nested
     class Update {
-        private static final String REQUEST_TEMPLATE = """
+
+        private static final String NAME_TEMPLATED_CITY_PAYLOAD_TEMPLATE = """
                      {
                         "name" : %s,
                         "photo" : "url"
                      }
                 """;
+        private static final String PHOTO_TEMPLATED_CITY_PAYLOAD_TEMPLATE = """
+                     {
+                        "name" : "cityName",
+                        "photo" : %s
+                     }
+                """;
 
-        private static final String VALID_REQUEST = REQUEST_TEMPLATE.formatted("\"name\"");
+        private static final String VALID_REQUEST = NAME_TEMPLATED_CITY_PAYLOAD_TEMPLATE.formatted("\"name\"");
 
         @Nested
         class Fail {
 
             @ParameterizedTest
             @NullAndEmptySource
-            void whenNameIsEmpty(String name) throws Exception {
+            void when_NameIsEmpty(String name) throws Exception {
                 var cityId = 1;
                 mockMvc.perform(MockMvcRequestBuilders
                                 .put(CITY_API_URL + "/" + cityId)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                // language=json
-                                .content(REQUEST_TEMPLATE.formatted(Optional.ofNullable(name).map("\"%s\""::formatted).orElse(name)))
+                                .content(NAME_TEMPLATED_CITY_PAYLOAD_TEMPLATE.formatted(Optional.ofNullable(name)
+                                        .map("\"%s\""::formatted).orElse(name)))
                         ).andDo(print())
                         .andExpect(status().isBadRequest())
                         .andExpect(jsonPath("$.message").value("Request object contains malformed data"))
@@ -128,8 +133,25 @@ class CityRestControllerTest {
             }
 
             @ParameterizedTest
+            @NullAndEmptySource
+            void when_UrlIsEmpty(String photoUrl) throws Exception {
+                var cityId = 1;
+                mockMvc.perform(MockMvcRequestBuilders
+                                .put(CITY_API_URL + "/" + cityId)
+                                .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(PHOTO_TEMPLATED_CITY_PAYLOAD_TEMPLATE.formatted(Optional.ofNullable(photoUrl)
+                                        .map("\"%s\""::formatted).orElse(photoUrl)))
+                        ).andDo(print())
+                        .andExpect(status().isBadRequest())
+                        .andExpect(jsonPath("$.message").value("Request object contains malformed data"))
+                        .andExpect(jsonPath("$.violations[0].field").value("cityRequest.photo"))
+                        .andExpect(jsonPath("$.violations[0].message").value("must not be blank"));
+            }
+
+            @ParameterizedTest
             @CsvSource({"-1", "0"})
-            void whenPathIsInvalid(String cityId) throws Exception {
+            void when_PathIsInvalid(String cityId) throws Exception {
                 mockMvc.perform(MockMvcRequestBuilders
                                 .put(CITY_API_URL + "/" + cityId)
                                 .accept(MediaType.APPLICATION_JSON)
@@ -154,7 +176,7 @@ class CityRestControllerTest {
                     """;
 
             @Test
-            void whenRequestIsValid() throws Exception {
+            void when_RequestIsValid() throws Exception {
                 var cityId = 1L;
                 var cityModel = mock(City.class);
                 var cityUpdatedModel = mock(City.class);

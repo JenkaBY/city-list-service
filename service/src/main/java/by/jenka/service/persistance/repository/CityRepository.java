@@ -5,6 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface CityRepository extends PagingAndSortingRepository<CityEntity, Long>,
-        JpaSpecificationExecutor<CityEntity>, JpaRepository<CityEntity, Long> {
+public interface CityRepository extends JpaSpecificationExecutor<CityEntity>, JpaRepository<CityEntity, Long> {
 }

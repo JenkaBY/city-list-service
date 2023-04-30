@@ -6,6 +6,7 @@ import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.controller.model.response.CityResponse;
 import by.jenka.service.service.CityService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.Nullable;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.core.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -33,12 +35,23 @@ public class CityRestController {
                     "Additionally supports search type")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public Iterable<CityResponse> findAllBySearchCriteria(
+    public Page<CityResponse> findAllBySearchCriteria(
             @ParameterObject @Nullable CitySearchCriteria citySearchCriteria,
             @ParameterObject Pageable pageableRequest) {
         log.info("Find cities by criteria {} and page {}", citySearchCriteria, pageableRequest);
         return cityService.findAllBySearchCriteria(citySearchCriteria, pageableRequest)
                 .map(mapper::toResponse);
+    }
+
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Return a city"),
+            @ApiResponse(responseCode = "404", description = "The city with specified id was not found")
+    })
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/{id}")
+    public CityResponse find(@PathVariable @Positive @NotNull Long id) {
+        log.info("Find city by id {}", id);
+        return mapper.toResponse(cityService.findById(id));
     }
 
     @ResponseStatus(HttpStatus.OK)

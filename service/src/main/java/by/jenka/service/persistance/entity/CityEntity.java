@@ -1,22 +1,39 @@
 package by.jenka.service.persistance.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Data
 @Entity
 @Table(name = "city")
+@Builder(toBuilder = true)
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class CityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(nullable = false, length = 65000)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 65000)
     private String photo;
+
+    @Override
+    public int hashCode() {
+        return 11;
+    }
+
+    @Override
+    public boolean equals(Object another) {
+        if (this == another)
+            return true;
+        if (another == null)
+            return false;
+        if (getClass() != another.getClass())
+            return false;
+        CityEntity other = (CityEntity) another;
+        return id != null && id.equals(other.getId());
+    }
 }

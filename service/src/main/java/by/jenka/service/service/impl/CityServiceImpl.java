@@ -1,8 +1,8 @@
 package by.jenka.service.service.impl;
 
+import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.persistance.entity.CityEntity;
 import by.jenka.service.persistance.repository.CityRepository;
-import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.service.CityService;
 import by.jenka.service.service.exception.ResourceNotFoundException;
 import by.jenka.service.service.mapper.CityMapper;
@@ -28,6 +28,11 @@ public class CityServiceImpl implements CityService {
         var citySpec = citySpecificationMapper.fromSearchCriteria(citySearchCriteria);
         return cityRepository.findAll(citySpec, pageable)
                 .map(cityMapper::fromEntity);
+    }
+
+    @Override
+    public City findById(Long id) {
+        return cityMapper.fromEntity(getCity(id));
     }
 
     @Transactional

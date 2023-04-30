@@ -1,11 +1,8 @@
 spring:
   application:
-    name: city-list-service
+    name: city-api-service
   datasource:
-    db-name: citydb
-    host: localhost
-    port: 5433
-    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.db-name}
+    url: jdbc:postgresql://localhost:5433/citydb
     username: postgres
     password: postgres
   liquibase:
@@ -14,5 +11,14 @@ spring:
     drop-first: false
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     open-in-view: false
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      cors:
+        allowed-headers: "*"
+        allowed-origins: "*"
+        allowed-methods: "OPTIONS,GET,POST"

@@ -1,8 +1,8 @@
 package by.jenka.service.service.impl;
 
+import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.persistance.entity.CityEntity;
 import by.jenka.service.persistance.repository.CityRepository;
-import by.jenka.service.controller.model.request.CitySearchCriteria;
 import by.jenka.service.service.exception.ResourceNotFoundException;
 import by.jenka.service.service.mapper.CityMapper;
 import by.jenka.service.service.mapper.CitySpecificationMapper;
@@ -55,7 +55,7 @@ class CityServiceImplTest {
     @Test
     void update_Should_SaveUpdatedEntity_When_BeingUpdatedCityExists() {
         var withUpdate = mock(City.class);
-        var id = 1L ;
+        var id = 1L;
         var foundCityEntity = mock(CityEntity.class);
         var updatedCityEntity = mock(CityEntity.class);
         var updatedCity = mock(City.class);
@@ -72,10 +72,10 @@ class CityServiceImplTest {
     @Test
     void update_Should_ThrowResourceNotFound_When_BeingUpdatedCityDoesNotExist() {
         var withUpdate = mock(City.class);
-        var id = 1L ;
+        var id = 1L;
         when(cityRepository.findById(id)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() ->  underTest.update(id, withUpdate))
+        assertThatThrownBy(() -> underTest.update(id, withUpdate))
                 .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Resource City with Key %s not found".formatted(id));
     }

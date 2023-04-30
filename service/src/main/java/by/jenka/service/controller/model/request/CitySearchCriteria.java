@@ -2,7 +2,6 @@ package by.jenka.service.controller.model.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;
-import jakarta.validation.constraints.NotNull;
 
 public record CitySearchCriteria(
         @Schema(description = "Search parameters to search the city")
