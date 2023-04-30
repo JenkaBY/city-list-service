@@ -1,0 +1,27 @@
+<main>
+  <article>
+    <h1>Home Page</h1>
+    <p>Welcome to the best city catalogue</p>
+    <p>This site is built on the latest Angular {{ VERSION.full }} version for
+      frontend and on Spring Boot 3 for backend.</p>
+    <section>
+      <h3>Backend stack</h3>
+      <ul>
+        <li *ngFor="let stack of backendStacks">{{stack.name}}</li>
+      </ul>
+      <p class="highlight">Swagger is available <a href="http://localhost:8080/swagger-ui/index.html"
+                                 target="_blank" rel="noopener noreferrer">here</a>
+      </p>
+    </section>
+    <section>
+      <h3>Frontend stack</h3>
+      <ul>
+        <li *ngFor="let stack of frontendStacks">{{stack.name}}</li>
+      </ul>
+
+      <p class="highlight">The awesome and mind-blowing UI is available <a href="http://localhost:81"
+                                                         target="_blank" rel="noopener noreferrer">here</a>
+      </p>
+    </section>
+  </article>
+</main>

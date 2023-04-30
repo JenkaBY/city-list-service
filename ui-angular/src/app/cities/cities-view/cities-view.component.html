@@ -1,0 +1,17 @@
+<div class="container">
+  <city-search-component (citiesSearchEvent)="handleCitySearchEvent($event)"></city-search-component>
+
+  <cities-list *ngIf="!!citiesPage"
+               [cities]="citiesPage.content"
+               class="img-list-container"></cities-list>
+
+  <mat-paginator *ngIf="!!citiesPage"
+                 [length]="citiesPage.totalElements || 0"
+                 [pageSize]="citiesPage.size || pageRequestParams.size"
+                 [pageIndex]="pageRequestParams.page"
+                 [pageSizeOptions]="[6, 12, 24, 99]"
+                 [showFirstLastButtons]="true"
+                 aria-label="Select page"
+                 (page)="handlePageEvent($event)">
+  </mat-paginator>
+</div>

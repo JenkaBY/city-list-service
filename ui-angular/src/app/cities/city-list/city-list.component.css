@@ -1,0 +1,16 @@
+.grid-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-gap: 10px;
+  justify-content: center;
+  align-content: center;
+  gap: 4px;
+}
+
+.grid-list-container city-view {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+}

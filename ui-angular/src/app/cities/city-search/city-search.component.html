@@ -1,0 +1,25 @@
+<div class="container">
+  <form class="search-form" [formGroup]="searchForm" (ngSubmit)="searchCities()">
+    <mat-form-field appearance="fill">
+      <mat-label>Select search type</mat-label>
+      <mat-select id="search-type" formControlName="searchType">
+        <mat-option value="{{searchType.likeIgnoreCase.value}}">
+          {{searchType.likeIgnoreCase.humanName}}
+        </mat-option>
+        <mat-option value="{{searchType.startsWith.value}}">
+          {{searchType.startsWith.humanName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Start typing here</mat-label>
+      <input matInput placeholder="Ex. Paris" formControlName="name">
+    </mat-form-field>
+    <button mat-button color="primary"
+            class="search-btn"
+            type="submit"
+            disabled="{{isSearching}}">
+      Search
+    </button>
+  </form>
+</div>

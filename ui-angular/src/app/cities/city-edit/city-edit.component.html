@@ -1,0 +1,30 @@
+<div class="city-edit-container" *ngIf="cityUpdatedState">
+  <div class="city-edit-form-container city-edit-item">
+    <h3 class="title">Edit city</h3>
+    <form class="city-form" [formGroup]="cityForm" (ngSubmit)="onSaveCity()">
+      <mat-form-field>
+        <mat-label>City name</mat-label>
+        <input matInput formControlName="name" [value]="cityUpdatedState.name">
+        <mat-hint align="start">Enter city name</mat-hint>
+        <mat-error *ngIf="cityForm.invalid">The city name must be present</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Photo url</mat-label>
+        <input matInput formControlName="photo" [value]="cityUpdatedState.photo">
+        <mat-hint align="start">Enter a link on a photo</mat-hint>
+        <mat-error *ngIf="cityForm.invalid">Provide a valid url</mat-error>
+      </mat-form-field>
+      <div class="btn-container">
+        <a mat-raised-button (click)="onCancel()">Cancel</a>
+        <button mat-raised-button color="primary"
+                type="submit"
+                [disabled]="cityForm.invalid || isSaving || !(this.cityForm.dirty || this.cityForm.touched)">Save</button>
+      </div>
+    </form>
+  </div>
+  <div class="city-edit-preview-container city-edit-item">
+    <h3 class="title">Preview</h3>
+    <city-view [city]="cityUpdatedState" [isEdit]="false"></city-view>
+  </div>
+
+</div>

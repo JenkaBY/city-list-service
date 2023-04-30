@@ -1,0 +1,12 @@
+<footer>
+  <div class="container">
+    <div class="status-container">
+      <div class="status-icon status-actual"
+           [ngClass]="healthStatus.status | lowercase"
+           title="{{healthStatus.status | titlecase}}"
+      ></div>
+      <div class="status-description">&nbsp;Api Server Status</div>
+    </div>
+    <div class="copyrights"> {{today | date: 'yyyy'}}, JenkaBY &copy;</div>
+  </div>
+</footer>

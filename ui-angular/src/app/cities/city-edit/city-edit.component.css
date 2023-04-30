@@ -1,0 +1,25 @@
+
+.city-edit-container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.city-edit-item {
+  margin: 20px;
+}
+
+.city-edit-form-container, .city-form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.btn-container {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 10px;
+  margin-right: 10px;
+}

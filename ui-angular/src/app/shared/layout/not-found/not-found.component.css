@@ -1,0 +1,12 @@
+.container {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+.container * {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+}

@@ -1,0 +1,39 @@
+.card {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+.card:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+}
+
+.flex-row-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.padding-left-10 {
+  padding-left: 10px;
+}
+
+.padding-right-20 {
+  padding-right: 20px;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.limit-height {
+  max-height: 348px;
+}
+
+.limit-width {
+  max-width: 400px;
+}

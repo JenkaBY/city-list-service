@@ -1,0 +1,14 @@
+<mat-card class="card city-card margin-bottom-10 margin-top-10">
+  <img mat-card-image *ngIf="city.photo" ngSrc="{{city.photo}}" alt="{{city.name}}"
+       title="{{city.name}}"
+       defaultImage
+       class="limit-height limit-width"
+       height="348"
+       width="400">
+  <mat-card-actions class="flex-row-container justify-space-between">
+    <mat-card-title class="padding-left-10">{{city.name}}</mat-card-title>
+    <button *ngIf="isEdit" mat-stroked-button class="padding-right-20"
+            (click)="navigateToEdit()">Edit
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,55 @@
+footer {
+  position: fixed;
+  width: 100%;
+  height: 20px;
+  /*background-color: yellow;*/
+  padding: 0;
+  bottom: 0;
+  margin-bottom: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.status-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-actual {
+  background-color: red;
+}
+
+.down {
+  background-color: red;
+}
+
+.up {
+  background-color: green;
+}
+
+.loading {
+  background-color: darkgrey;
+}
+
+.container .status-container {
+  justify-content: flex-start;
+}
+
+.copyrights {
+  margin-right: 10px;
+}
