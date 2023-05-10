@@ -16,8 +16,8 @@ export class CityViewComponent {
   }
 
   navigateToEdit() {
-    this.router.navigate(['/cities/', this.city.id], {
+    void this.router.navigate(['/cities/', this.city.id], {
       state: this.route.snapshot.queryParams
-    }).then();
+    });
   }
 }

@@ -7,6 +7,7 @@ import {CitySearchRequest, SearchType} from "../../core/models/city-search-reque
 import {PageEvent} from "@angular/material/paginator";
 import {PageableRequest} from "../../core/models/pageable-request";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Subject, switchMap} from "rxjs";
 
 @Component({
   selector: 'cities-view',
@@ -17,10 +18,12 @@ export class CitiesViewComponent implements OnInit {
   constructor(private cityService: CityService, private loggingService: LoggingService,
               private router: Router, private route: ActivatedRoute) {
   }
-
+  private readonly emptyEvent = undefined;
   citiesPage!: Page<CityResponse>;
   areCitiesLoaded = false;
   isError = false;
+
+  private searchCityEvent$ = new Subject<void>();
   private citySearchParams = {} as CitySearchRequest;
   pageRequestParams = {
     size: 12,
@@ -31,23 +34,11 @@ export class CitiesViewComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.citySearchParams.name = params['name'] || '';
       this.citySearchParams.searchType = params['searchType'] || SearchType.LIKE_IGNORE_CASE;
-      this.pageRequestParams.page = params['page'] || 0;
-      this.pageRequestParams.size = params['size'] || 12;
+      this.pageRequestParams.page = params['page'] || this.pageRequestParams.page;
+      this.pageRequestParams.size = params['size'] || this.pageRequestParams.size;
     });
-    this.getCities();
-  }
-
-  getCities(): void {
-    this.cityService.getCities(this.mergeAndGetRequestParams())
-      .subscribe(
-        {
-          next: (response: Page<CityResponse>) => this.setCitiesPageResponse(response),
-          error: () => {
-            this.isError = true;
-          },
-          complete: () => this.areCitiesLoaded = true
-        }
-      );
+    this.initSearchCity();
+    this.triggerSearchCityEvent();
   }
 
   private mergeAndGetRequestParams() {
@@ -63,28 +54,45 @@ export class CitiesViewComponent implements OnInit {
 
   handleCitySearchEvent($citySearchEvent: CitySearchRequest) {
     this.citySearchParams = $citySearchEvent;
-    this.getCities();
-    this.router.navigate([],
-      {
-        relativeTo: this.route,
-        queryParams: this.mergeAndGetRequestParams(),
-        queryParamsHandling: 'merge',
-      }).then()
+    this.pageRequestParams.page = 0;
+    this.triggerSearchCityEvent();
   }
 
   handlePageEvent($pageEvent: PageEvent) {
-    this.loggingService.put(JSON.stringify($pageEvent));
     this.pageRequestParams.page = $pageEvent.pageIndex;
     this.pageRequestParams.size = $pageEvent.pageSize;
-    this.getCities();
-    this.router.navigate([],
+    this.triggerSearchCityEvent()
+  }
+
+  private triggerSearchCityEvent() {
+    this.searchCityEvent$.next(this.emptyEvent);
+  }
+
+  private initSearchCity(): void {
+    this.searchCityEvent$.pipe(
+      switchMap(() => this.cityService.getCities(this.mergeAndGetRequestParams()))
+    )
+      .subscribe(
+        {
+          next: (response: Page<CityResponse>) => {
+            this.setCitiesPageResponse(response);
+            this.updateRouteQueryParams();
+            this.areCitiesLoaded = true;
+            },
+          error: () => {
+            this.loggingService.error("Error occurred during fetching cities");
+            this.isError = true;
+          }
+        }
+      );
+  }
+
+  private updateRouteQueryParams() {
+    void this.router.navigate([],
       {
         relativeTo: this.route,
         queryParams: this.mergeAndGetRequestParams(),
         queryParamsHandling: 'merge',
-        // preserve the existing query params in the route
-        // skipLocationChange: true
-        // do not trigger navigation
-      }).then()
+      });
   }
 }

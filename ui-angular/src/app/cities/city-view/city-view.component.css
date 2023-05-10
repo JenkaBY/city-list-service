@@ -1,5 +1,4 @@
 .card {
-  max-width: 400px;
   max-height: 400px;
 }
 
@@ -29,11 +28,4 @@
 }
 .margin-top-10 {
   margin-top: 10px;
-}
-.limit-height {
-  max-height: 348px;
-}
-
-.limit-width {
-  max-width: 400px;
 }

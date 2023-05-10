@@ -6,8 +6,9 @@ import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CityResponse} from "../../core/models/city";
 import {debounceTime} from "rxjs";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiError} from "../../core/models/api-error";
+import {Constant} from "../../core/configs/constant";
 
 @Component({
   selector: 'city-edit-component',
@@ -17,7 +18,6 @@ import {ApiError} from "../../core/models/api-error";
   ]
 })
 export class CityEditComponent implements OnInit {
-  private URL_PATTERN = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
 
   constructor(private cityService: CityService,
               private route: ActivatedRoute,
@@ -27,10 +27,6 @@ export class CityEditComponent implements OnInit {
               private location: Location) {
   }
 
-  private readonly _snackBarConfig = {
-    horizontalPosition: 'end',
-    duration: 3000
-  } as MatSnackBarConfig;
   cityId!: number
   cityUpdatedState!: CityResponse;
   cityInitialState!: CityResponse;
@@ -51,16 +47,16 @@ export class CityEditComponent implements OnInit {
                 [Validators.required]
               ),
               photo: new FormControl(res.photo,
-                [Validators.required, Validators.pattern(this.URL_PATTERN)]),
+                [Validators.required, Validators.pattern(Constant.URL_PATTERN)]),
             }
           );
           this.onFormChanged();
-          this.cityUpdatedState = res as CityResponse;
-          this.cityInitialState = {...res as CityResponse};
+          this.cityUpdatedState = res;
+          this.cityInitialState = { ...res};
         },
         error: (err: ApiError) => {
           this.notifyUser(err.message);
-          this.router.navigate(['/not-found']).then();
+          void this.router.navigate(['/not-found']);
         },
         complete: () => this.isComponentLoaded = true
       }
@@ -101,10 +97,10 @@ export class CityEditComponent implements OnInit {
   }
 
   private goToCitiesPage() {
-    this.router.navigate(['/cities'], {queryParams: this.queryParams}).then();
+    void this.router.navigate(['/cities'], {queryParams: this.queryParams});
   }
 
   private notifyUser(message: string) {
-    this.snackBar.open(message, '', this._snackBarConfig);
+    this.snackBar.open(message);
   }
 }

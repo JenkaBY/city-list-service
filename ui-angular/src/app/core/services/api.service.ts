@@ -10,6 +10,7 @@ import {LoggingService} from './logging.service';
   providedIn: 'root'
 })
 export class ApiService {
+
   constructor(private http: HttpClient, private loggingService: LoggingService) {
   }
 
@@ -30,7 +31,7 @@ export class ApiService {
       .pipe(catchError(this.handleError(url, 'GET')));
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
+  put(path: string, body: object = {}): Observable<any> {
     const url = `${environment.apiUrl}${path}`;
     return this.http.put(
       url,
@@ -39,7 +40,7 @@ export class ApiService {
     ).pipe(catchError(this.handleError(url, 'PUT')));
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
+  post(path: string, body: object = {}): Observable<any> {
     const url = `${environment.apiUrl}${path}`;
     return this.http.post(
       url,

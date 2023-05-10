@@ -2,3 +2,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.limit-height {
+  max-height: 348px;
+}
+
+.limit-width {
+  max-width: 400px;
+}
+

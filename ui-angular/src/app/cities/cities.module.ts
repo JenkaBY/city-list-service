@@ -19,20 +19,20 @@ import {NgOptimizedImage} from "@angular/common";
 
 
 @NgModule({
-    imports: [
-        SharedModule,
-        CitiesRoutingModule,
-        MatTabsModule,
-        MatProgressSpinnerModule,
-        MatGridListModule,
-        MatInputModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatCardModule,
-        MatPaginatorModule,
-        NgOptimizedImage
-    ],
+  imports: [
+    SharedModule,
+    CitiesRoutingModule,
+    MatTabsModule,
+    MatProgressSpinnerModule,
+    MatGridListModule,
+    MatInputModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatCardModule,
+    MatPaginatorModule,
+    NgOptimizedImage
+  ],
   declarations: [
     CitiesViewComponent,
     CityListComponent,

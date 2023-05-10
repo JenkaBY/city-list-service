@@ -10,6 +10,8 @@ import {SharedModule} from './shared/shared.module';
 import {CitiesModule} from "./cities/cities.module";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NotFoundComponent} from "./shared/layout/not-found/not-found.component";
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS} from "@angular/material/snack-bar";
+import SnackBarConfig from "./core/configs/snack-bar-config";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {NotFoundComponent} from "./shared/layout/not-found/not-found.component";
     CitiesModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: SnackBarConfig.DEFAULT}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

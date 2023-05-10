@@ -1,4 +1,5 @@
 import {Component, VERSION} from '@angular/core';
+import {StackItem} from "../core/models/stack-item";
 
 @Component({
   selector: 'home-component',
@@ -28,12 +29,4 @@ export class HomeComponent {
     new StackItem('Material UI'),
   ]
 
-}
-
-export class StackItem {
-  name: string;
-
-  constructor(name: string) {
-    this.name = name;
-  }
 }

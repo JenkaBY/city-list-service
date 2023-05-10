@@ -1,7 +1,8 @@
 import {Component, OnDestroy} from '@angular/core';
 import {interval, Subscription} from 'rxjs';
-import {HealthStatus} from '../../../core/models/health-status';
 import {ApiHealthCheckService} from '../../../core/services/api-health-check.service';
+import {Constant} from "../../../core/configs/constant";
+import {HealthStatus} from "../../../core/models/health-status";
 
 @Component({
   selector: 'app-layout-footer',
@@ -13,12 +14,11 @@ import {ApiHealthCheckService} from '../../../core/services/api-health-check.ser
 export class FooterComponent implements OnDestroy {
   constructor(private healthCheckService: ApiHealthCheckService) {
     const healthCheckSubscription = this.healthCheckService.getApiHealthStatus();
-    this.healthStatusSub = interval(this.FIVE_SECONDS).subscribe((_) => {
+    this.healthStatusSub = interval(Constant.FIVE_SECONDS).subscribe((_) => {
       healthCheckSubscription.subscribe(healthStatus => this.healthStatus = healthStatus);
     });
   }
 
-  private readonly FIVE_SECONDS = 5000;
   healthStatus = HealthStatus.loading;
   today: number = Date.now();
   healthStatusSub: Subscription;
